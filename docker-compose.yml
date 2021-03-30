@@ -10,7 +10,7 @@ version: '3.1'
       mysqlcluster:
         ipv4_address: 172.28.0.2
 
-  ndb1:
+  node1:
     image: mysql/mysql-cluster
     volumes:
        - ./file/my.cnf:/my.cnf
@@ -22,7 +22,7 @@ version: '3.1'
       mysqlcluster:
         ipv4_address: 172.28.0.3
 
-  ndb2:
+  node2:
     image: mysql/mysql-cluster
     volumes:
        - ./file/my.cnf:/my.cnf
@@ -34,7 +34,7 @@ version: '3.1'
       mysqlcluster:
         ipv4_address: 172.28.0.4
 
-  ndb3:
+  node3:
     image: mysql/mysql-cluster
     volumes:
        - ./file/my.cnf:/my.cnf
@@ -49,7 +49,7 @@ version: '3.1'
   mysql1:
     image: mysql/mysql-cluster
     ports:
-      - "3306:3306"
+      - "3906:3906"
     volumes:
        - ./file/my.cnf:/my.cnf
        - ./file/mysql-cluster.cnf:/mysql-cluster.cnf
@@ -62,9 +62,9 @@ version: '3.1'
     command: mysqld
     depends_on:
       - "management1"
-      - "ndb1"
-      - "ndb2"
-      - "ndb3"
+      - "node1"
+      - "node2"
+      - "node3"
     networks:
       mysqlcluster:
         ipv4_address: 172.28.0.10
